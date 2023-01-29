@@ -1,6 +1,7 @@
 package com.rkhvstnv.splitbills.components
 
 
+import android.icu.text.DecimalFormat
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -60,7 +61,7 @@ fun PerPersonCard(
                 style = MaterialTheme.typography.titleMedium
             )
 
-            val total = "%.2f".format(totalPerPerson.value)
+            val total = "%,.2f".format(totalPerPerson.value)
             Text(
                 text = "$ $total",
                 color = MaterialTheme.colorScheme.onPrimaryContainer,

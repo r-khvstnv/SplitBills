@@ -30,7 +30,6 @@ fun InputFieldPreview(){
         valueState = mValue.collectAsState(),
         label = "Preview Label",
         onValueChanged = ::updateValue,
-        keyboardType =  KeyboardType.Number
     )
 }
 
@@ -42,7 +41,7 @@ fun InputField(
     valueState: State<String>,
     label: String,
     onValueChanged: (String) -> Unit,
-    keyboardType: KeyboardType,
+    isEnabled: Boolean = false,
     isSingleLine: Boolean = true,
     imeAction: ImeAction = ImeAction.Done,
     onAction: KeyboardActions = KeyboardActions.Default
@@ -61,8 +60,9 @@ fun InputField(
             )
         },
         textStyle = MaterialTheme.typography.bodyLarge,
-        keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = imeAction),
-        keyboardActions = onAction
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = imeAction),
+        keyboardActions = onAction,
+        enabled = isEnabled
     )
 
 }
