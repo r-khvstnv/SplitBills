@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Split Bills</string>
+
+    <string name="title_total_per_person">Total Per Person</string>
+    <string name="label_bill">Bill</string>
 </resources>
