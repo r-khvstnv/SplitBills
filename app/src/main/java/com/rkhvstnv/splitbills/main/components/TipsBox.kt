@@ -1,10 +1,8 @@
-package com.rkhvstnv.splitbills.components
+package com.rkhvstnv.splitbills.main.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
@@ -34,9 +32,14 @@ fun TipsBoxPreview(){
 
 }
 
+/**
+ * Method shows functional part for tips adding
+ * */
 @Composable
 fun TipsBox(
+    /** Progress of [Slider]*/
     progress: State<Float>,
+    /** Method to handle result of changes in [Slider]*/
     onProgressChanged: (Float) -> Unit,
 ){
     Column {
@@ -51,6 +54,9 @@ fun TipsBox(
 
             Spacer(modifier = Modifier.weight(1f))
 
+            /*
+            * Show current progress of Slider in percentage
+            * */
             val displayedProgress: Int = (progress.value * 100).toInt()
             Text(
                 text = "$displayedProgress %",

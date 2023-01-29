@@ -1,4 +1,4 @@
-package com.rkhvstnv.splitbills
+package com.rkhvstnv.splitbills.main
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

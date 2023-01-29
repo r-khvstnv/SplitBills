@@ -1,7 +1,6 @@
-package com.rkhvstnv.splitbills.components
+package com.rkhvstnv.splitbills.main.components
 
 
-import android.icu.text.DecimalFormat
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -28,7 +27,9 @@ fun PerPersonCardPreview(){
 }
 
 
-
+/**
+ * Method shows the money quantity estimated per person
+ * */
 @Composable
 fun PerPersonCard(
     totalPerPerson: State<Double>
@@ -44,7 +45,7 @@ fun PerPersonCard(
             containerColor = MaterialTheme.colorScheme.primaryContainer
         ),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = dimensionResource(id = R.dimen.card_per_person_def_elevation)
+            defaultElevation = dimensionResource(id = R.dimen.m_card_elevation)
         )
     ) {
         Column(
@@ -61,6 +62,7 @@ fun PerPersonCard(
                 style = MaterialTheme.typography.titleMedium
             )
 
+            //Implement decimal number format to parameter
             val total = "%,.2f".format(totalPerPerson.value)
             Text(
                 text = "$ $total",

@@ -1,4 +1,4 @@
-package com.rkhvstnv.splitbills
+package com.rkhvstnv.splitbills.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -16,14 +16,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.rkhvstnv.splitbills.components.InputField
-import com.rkhvstnv.splitbills.components.PerPersonCard
-import com.rkhvstnv.splitbills.components.SplitRow
-import com.rkhvstnv.splitbills.components.TipsBox
+import com.rkhvstnv.splitbills.R
+import com.rkhvstnv.splitbills.main.components.InputField
+import com.rkhvstnv.splitbills.main.components.PerPersonCard
+import com.rkhvstnv.splitbills.main.components.SplitRow
+import com.rkhvstnv.splitbills.main.components.TipsBox
 import com.rkhvstnv.splitbills.ui.theme.SplitBillsTheme
 
 class MainActivity : ComponentActivity() {
@@ -48,7 +48,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainRoot(content: @Composable () -> Unit){
-    // A surface container using the 'background' color from the theme
     Surface(color = MaterialTheme.colorScheme.background) {
         content()
     }
@@ -83,13 +82,17 @@ fun MainBody(viewModel: MainViewModel){
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.m_card_corner_radius)),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.background
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = dimensionResource(id = R.dimen.m_card_elevation)
         )
     ) {
-        
         Column(
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.card_content_padding))
         ) {
+
+            Spacer(modifier = Modifier.padding(32.dp))
 
             SplitRow(
                 quantity = viewModel.personQuantity.collectAsState(),
@@ -97,13 +100,14 @@ fun MainBody(viewModel: MainViewModel){
                 onIncreaseClick = viewModel::increasePersonQuantity
             )
 
-            Spacer(modifier = Modifier.padding(20.dp))
+            Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.m_default_spacer)))
 
             TipsBox(
                 progress = viewModel.tipsPercent.collectAsState(),
                 onProgressChanged = viewModel::updateTipsPercent
             )
 
+            Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.m_default_spacer)))
 
             val billValueState = viewModel.billValue.collectAsState()
             val keyboardController = LocalSoftwareKeyboardController.current
@@ -121,7 +125,6 @@ fun MainBody(viewModel: MainViewModel){
                 }
             )
         }
-
     }
 }
 

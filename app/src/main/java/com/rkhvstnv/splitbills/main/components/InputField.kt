@@ -1,4 +1,4 @@
-package com.rkhvstnv.splitbills.components
+package com.rkhvstnv.splitbills.main.components
 
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -13,17 +13,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import com.rkhvstnv.splitbills.R
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 @Preview(showBackground = true)
 @Composable
 fun InputFieldPreview(){
-    val _mValue = MutableStateFlow("")
-    val mValue: StateFlow<String> = _mValue.asStateFlow()
+    val mValue = MutableStateFlow("")
 
     fun updateValue(input: String){
-        _mValue.value = input
+        mValue.value = input
     }
 
     InputField(
@@ -33,28 +30,42 @@ fun InputFieldPreview(){
     )
 }
 
-
+/**
+ *  Method shows [OutlinedTextField] with minor customisation.
+ *  Applicable only for [KeyboardType.Number] input.
+ *
+ *  Operating value is [String]
+ * */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InputField(
     modifier: Modifier = Modifier,
+    /**Value that displaying in [OutlinedTextField]*/
     valueState: State<String>,
+    /**Label for [OutlinedTextField]*/
     label: String,
+    /**Method for handling [String] after every user interaction*/
     onValueChanged: (String) -> Unit,
+    /**State of enabling [OutlinedTextField]*/
     isEnabled: Boolean = false,
-    isSingleLine: Boolean = true,
     imeAction: ImeAction = ImeAction.Done,
     onAction: KeyboardActions = KeyboardActions.Default
 ){
     OutlinedTextField(
         modifier = modifier,
         value = valueState.value,
-        onValueChange = onValueChanged,
-        singleLine = isSingleLine,
+        onValueChange = { 
+                input ->
+            //Handle max length of the String
+            if (input.length < 10){
+                onValueChanged(input)
+            }
+        },
         label = { Text(text = label)},
         leadingIcon = {
+            //Custom icon
             Icon(
-                painter = painterResource(id = R.drawable.currency_bitcoin_24),
+                painter = painterResource(id = R.drawable.ic_currency_bitcoin_24),
                 contentDescription = "Currency Icon",
                 tint = MaterialTheme.colorScheme.primary
             )

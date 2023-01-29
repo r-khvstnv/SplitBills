@@ -1,4 +1,4 @@
-package com.rkhvstnv.splitbills.components
+package com.rkhvstnv.splitbills.main.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,11 +36,16 @@ fun SplitRowPreview(){
     )
 }
 
-
+/**
+ * Method shows functional part for bill splitting
+ * */
 @Composable
 fun SplitRow(
+    /**Bill divider value*/
     quantity: State<Int>,
+    /**Method on decrease request*/
     onDecreaseClick: () -> Unit,
+    /**Method on increase request*/
     onIncreaseClick: () -> Unit,
 ){
     Row(
@@ -58,7 +63,7 @@ fun SplitRow(
             onClick = onDecreaseClick
         ){
             Icon(
-                painter = painterResource(id = R.drawable.remove_24),
+                painter = painterResource(id = R.drawable.ic_remove_24),
                 contentDescription = "")
         }
 
@@ -73,8 +78,9 @@ fun SplitRow(
             onClick = onIncreaseClick
         ){
             Icon(
-                painter = painterResource(id = R.drawable.add_24),
-                contentDescription = "")
+                painter = painterResource(id = R.drawable.ic_add_24),
+                contentDescription = ""
+            )
         }
     }
 }
